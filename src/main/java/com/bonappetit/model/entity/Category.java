@@ -2,17 +2,15 @@ package com.bonappetit.model.entity;
 
 import com.bonappetit.model.enums.CategoryName;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
 public class Category extends BaseEntity {
 
-    @Column(unique = true, nullable = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category_name", unique = true, nullable = false)
     private CategoryName name;
 
     private String description;
