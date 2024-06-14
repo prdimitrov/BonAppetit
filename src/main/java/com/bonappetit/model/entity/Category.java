@@ -1,6 +1,8 @@
 package com.bonappetit.model.entity;
 
 import com.bonappetit.model.enums.CategoryName;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Category extends BaseEntity {
     private String description;
 
     @OneToMany
+    @Fetch(FetchMode.JOIN)
     private List<Recipe> recipes;
 
     public Category() {

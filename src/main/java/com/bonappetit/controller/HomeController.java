@@ -6,12 +6,14 @@ import com.bonappetit.model.enums.CategoryName;
 import com.bonappetit.model.viewModels.RecipeViewModel;
 import com.bonappetit.repo.UserRepository;
 import com.bonappetit.service.RecipeService;
+import com.bonappetit.service.UserService;
 import com.bonappetit.util.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,11 +24,13 @@ public class HomeController {
     private final CurrentUser currentUser;
     private final RecipeService recipeService;
     private final UserRepository userRepository;
+    private final UserService userService;
 
-    public HomeController(CurrentUser currentUser, RecipeService recipeService, UserRepository userRepository) {
+    public HomeController(CurrentUser currentUser, RecipeService recipeService, UserRepository userRepository, UserService userService) {
         this.currentUser = currentUser;
         this.recipeService = recipeService;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -74,16 +78,17 @@ public class HomeController {
         model.addAttribute("dessertsCount", desserts.size());
         model.addAttribute("cocktailsCount", cocktails.size());
 
+        //User's favourite recipies and their count!
+        List<Recipe> favouriteRecipes = userRepository.findUserFavouriteRecipes(currentUser.getUsername());
+        model.addAttribute("favouriteRecipes", favouriteRecipes);
 
-        //Current user's favourite recipes count!
-        int favouritesCount = userRepository
-                .findUserFavouriteRecipes(currentUser.getUsername()).size();
-
+        int favouritesCount = favouriteRecipes.size();
         model.addAttribute("favouritesCount", favouritesCount);
 
         return "home";
     }
 
+    @Transactional
     @GetMapping("/users/add-favourite")
     private String addFavourite(@RequestParam Long recipeId) {
         //If user is not logged in!
@@ -99,7 +104,7 @@ public class HomeController {
 
             favouriteRecipes.add(recipeById);
 
-            userRepository.updateFavouriteRecipes(currentUser.getUsername(), favouriteRecipes);
+            userService.updateFavouriteRecipes(currentUser.getUsername(), favouriteRecipes);
         }
 
         return "redirect:/home";

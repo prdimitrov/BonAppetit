@@ -1,7 +1,7 @@
 package com.bonappetit.model.bindingModels;
 
-import com.bonappetit.model.entity.Category;
 import com.bonappetit.model.entity.User;
+import com.bonappetit.model.enums.CategoryName;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,7 +17,7 @@ public class AddRecipeModel {
     private String ingredients;
 
     @NotNull(message = "You must select a category!")
-    private Category category;
+    private CategoryName category;
 
 
     private User addedBy;
@@ -41,11 +41,11 @@ public class AddRecipeModel {
         this.ingredients = ingredients;
     }
 
-    public Category getCategory() {
+    public CategoryName getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryName category) {
         this.category = category;
     }
 

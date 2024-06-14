@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @FieldsMatch(first = "password",
- second = "confirmPassword",
- message = "Passwords do not match.")
+        second = "confirmPassword",
+        message = "Passwords do not match.")
 public class UserRegisterModel {
 
     @NotNull

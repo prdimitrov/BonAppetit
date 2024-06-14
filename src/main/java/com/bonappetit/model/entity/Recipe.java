@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "recipes")
@@ -18,8 +17,6 @@ public class Recipe extends BaseEntity {
 
     private String ingredients;
 
-
-    @NotNull
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     private Category category;

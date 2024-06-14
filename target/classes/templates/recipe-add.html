@@ -8,36 +8,42 @@
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add recipe</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
 
-    <form class="mx-auto w-25 bg-blur rounded" method="" action="/">
+    <form class="mx-auto w-25 bg-blur rounded" th:method="post" th:action="@{/recipes/add}" th:object="${recipeModel}">
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2">Name</label>
             </div>
-            <textarea type="text" class="form-control" id="name" name="name"></textarea>
-            <small class="text-danger">Name error message</small>
+            <textarea type="text" class="form-control" id="name" name="name"
+                      th:text="*{name}"
+                      th:errorclass="'is-invalid bg-danger'"></textarea>
+            <small class="text-danger invalid-feedback" th:errors="*{name}">Name error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="ingredients" class="h4 mb-2">Ingredients</label>
             </div>
-            <textarea type="text" class="form-control" id="ingredients" name="ingredients"></textarea>
-            <small class="text-danger">Ingredients error message</small>
+            <textarea type="text" class="form-control" id="ingredients" name="ingredients"
+                      th:text="*{ingredients}"
+                      th:errorclass="'is-invalid bg-danger'"></textarea>
+            <small class="text-danger invalid-feedback" th:errors="*{ingredients}">Ingredients error message</small>
         </div>
 
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="category" class="h4 mb-2">Category</label>
             </div>
-            <select class="browser-default custom-select" id="category" name="category">
+            <select class="browser-default custom-select" id="category" name="category"
+                    th:field="*{category}"
+                    th:errorclass="'is-invalid bg-danger'">
                 <option value="">Select category</option>
-                <option value="MAIN_DISH">Main Dish</option>
-                <option value="DESSERT">Dessert</option>
-                <option value="COCKTAIL">Cocktail</option>
+                <option th:each="category : ${T(com.bonappetit.model.enums.CategoryName).values()}"
+                        th:value="${category}"
+                        th:text="${category.displayName}"></option>
             </select>
 
-            <small class="text-danger">Category error message</small>
+            <small class="text-danger invalid-feedback" th:errors="*{category}">Category error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

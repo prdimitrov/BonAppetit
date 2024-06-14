@@ -1,4 +1,5 @@
 package com.bonappetit.controller;
+
 import com.bonappetit.model.bindingModels.UserLoginModel;
 import com.bonappetit.model.bindingModels.UserRegisterModel;
 import com.bonappetit.service.UserService;

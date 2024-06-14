@@ -22,9 +22,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u.favouriteRecipes FROM User u WHERE u.username = :username")
     List<Recipe> findUserFavouriteRecipes(@Param("username") String username);
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.favouriteRecipes = :favouriteRecipes WHERE u.username = :username")
-    void updateFavouriteRecipes(String username, Set<Recipe> favouriteRecipes);
 }
