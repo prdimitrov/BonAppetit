@@ -32,7 +32,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
 
         userRepository.save(user);
-//        userRepository.saveAndFlush(user);
+
     }
 
     public void login(UserLoginModel loginModel) {

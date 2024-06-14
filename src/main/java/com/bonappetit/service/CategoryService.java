@@ -39,4 +39,8 @@ public class CategoryService {
                     });
         }
     }
+
+    public Category getByCategoryName(CategoryName categoryName) {
+        return categoryRepository.findByName(categoryName);
+    }
 }
