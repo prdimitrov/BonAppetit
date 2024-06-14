@@ -21,11 +21,11 @@
             <ul class="navbar-nav row">
                 <th:block th:if="${@currentUser.isAnonymous()}">
                 <li class="nav-item col-md-4">
-                    <a class="nav-link text-primary active h5 text-stroke" href="/">Login</a>
+                    <a class="nav-link text-primary active h5 text-stroke" th:href="@{/users/login}">Login</a>
                 </li>
 
                 <li class="nav-item col-md-4">
-                    <a class="nav-link text-primary active h5 text-stroke" href="/">Register</a>
+                    <a class="nav-link text-primary active h5 text-stroke" th:href="@{/users/register}">Register</a>
                 </li>
                 </th:block>
 
