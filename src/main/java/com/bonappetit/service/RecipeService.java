@@ -25,4 +25,8 @@ public class RecipeService {
                 .map(recipe -> modelMapper.map(recipe, RecipeViewModel.class))
                 .collect(Collectors.toList());
     }
+
+    public Recipe getRecipeById(Long recipeId) {
+        return recipeRepository.getById(recipeId);
+    }
 }

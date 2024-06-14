@@ -31,7 +31,7 @@
 
                 <th:block th:if="${@currentUser.isLoggedIn()}">
                 <li class="nav-item col-md-4">
-                    <a class="nav-link text-primary active h5 text-stroke" href="/">Logout</a>
+                    <a class="nav-link text-primary active h5 text-stroke" th:href="@{/users/logout}">Logout</a>
                 </li>
                 </th:block>
             </ul>
